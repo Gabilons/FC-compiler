@@ -1,0 +1,52 @@
+boolean prime(integer n)
+begin
+	integer i; boolean isPrime, result;
+	if (n < 0)
+		result := prime(n);
+	else if (n < 2)
+		result := false;
+	else if (n = 2)
+		result := true;
+	else if (n mod 2 = 0)
+		result := false;
+	else
+		begin
+			i := 3;
+			isPrime := true;
+			while ( isPrime && i <= n / 2 )
+			begin
+				isPrime := (n mod i != 0);
+				i := i+2;
+			end
+			result := isPrime;
+		end
+	return result;
+end
+integer main( )
+begin
+	integer limit, number, counter:=0;
+	limit := readInteger();
+	for (number:=1; number<=3; number:=number + 1)
+		if (limit >= number)
+			begin
+				counter := counter + 1;
+				writeInteger(number);
+			end
+	number := 6;
+	while (number <= limit)
+		begin
+			if (prime(number-1))
+				begin
+					counter := counter + 1;
+					writeInteger(number-1);
+				end
+			if ((number != limit) && prime(number+1))
+				begin
+					counter := counter + 1;
+					writeInteger(number+1);
+				end
+			number := number + 6;
+		end
+	writeInteger(counter);
+	return 0;
+end

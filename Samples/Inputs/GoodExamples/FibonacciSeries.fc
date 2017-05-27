@@ -1,0 +1,28 @@
+// Fibonacci Series
+
+integer main()
+begin
+    integer i, n, t1 := 0, t2 := 1, nextTerm := 0;
+    writeString("Enter the number of terms: ");
+    n:=readInteger();
+    writeString("Fibonacci Series: ");
+    for (i := 1; i <= n; i:=i+1)
+    begin
+        // Prints the first two terms.
+        if(i = 1)
+        begin
+            writeInteger(t1);
+            continue;
+        end
+        if(i = 2)
+        begin
+            writeInteger(t1);
+            continue;
+        end
+        nextTerm := t1 + t2;
+        t1 := t2;
+        t2 := nextTerm;
+	writeInteger(nextTerm);
+    end
+    return 0;
+end

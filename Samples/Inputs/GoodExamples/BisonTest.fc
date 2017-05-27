@@ -1,0 +1,16 @@
+string a:='f', f:="fsdgdfg";
+integer i, j, k:= 0050, l:= -0060, m[6];
+real i, j, k:= 5, l:= 00600.00, m[6][5];
+real y_24:=+30e-4;
+boolean o:=true;
+
+integer main(string a, integer t5)
+begin
+    string a:='f', f:="fsdgdfg";
+    integer i, j, k:= 0050, l:= -0060, m[6];
+    real i, j, k:= 5, l:= 00600.00, m[6][5];
+    real y_24:=+30e-4;
+    boolean o:=true;
+
+    a:=readString();
+end

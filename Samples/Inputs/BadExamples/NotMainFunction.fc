@@ -1,0 +1,7 @@
+//not main error
+static real a, b, c,n:=100;
+string phrase, word;
+real spik[45]; integer sp[23][8], spk[45]; char spak[2][2];
+real x:=-100.50, matrix[40][100], y_24:=+30e-4;
+real matrix1[1][5],y[1][1*1];
+static integer I:=25, k[40][5];

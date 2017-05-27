@@ -1,0 +1,7 @@
+/* My wrong FC program */
+
+integer main()
+begin
+  writeString("Hello World!\n";
+  return 0;
+end

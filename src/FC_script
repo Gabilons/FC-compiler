@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+# Written by Kampylafkas Anastasios on April 23 2017
+
+# Directories
+#----------------------------------------
+Samples="../Samples"
+
+GoodExamples="/GoodExamples"
+BadExamples="/BadExamples"
+
+Inputs=${Samples}"/Inputs"
+Outputs=${Samples}"/Outputs"
+
+GoodInputs=${Inputs}${GoodExamples}
+GoodOutputs=${Outputs}${GoodExamples}
+
+BadInputs=${Inputs}${BadExamples}
+BadOutputs=${Outputs}${BadExamples}
+
+SrcCode=.
+
+compilerLocation=${SrcCode}"/FC_compiler"
+#----------------------------------------
+
+# File suffixies
+FC_files=".fc"
+OUT_files=".c"
+
+#Run Makefile
+echo
+echo Execute Makefile
+echo -------------------------------------------------------------------------------
+if [ ! -f .depend ]; then
+  touch .depend
+  make depend
+fi
+make
+echo -------------------------------------------------------------------------------
+
+# Cleanup Generated Outputs folder
+echo
+echo ---------------------------------
+echo "Cleaning Samples/Outputs folder |"
+if [ -d ${GoodOutputs} ]; then
+  rm -f ${GoodOutputs}/*
+  if [ -d ${BadOutputs} ]; then
+    rm -f ${BadOutputs}/*
+  fi
+fi
+echo -e "\e[32mDone                            \e[39m|"
+
+echo ---------------------------------
+echo
+
+# Run all the examples
+for exp in "Good" "Bad"
+do
+
+  # Generate the directory path
+
+  if [ ${exp} = "Good" ]; then
+    # Run good exmples
+    echo -e "\e[32m *** Run Good Examples ***\e[39m"
+    indir=${GoodInputs}
+    outdir=${GoodOutputs}
+  else
+    # Run bad exmples
+    echo -e "\e[31m *** Run Bad Examples ***\e[39m"
+    indir=${BadInputs}
+    outdir=${BadOutputs}
+  fi
+
+  # Run the exmples in the upper generated directory
+  for filepath in ${indir}/*${FC_files}
+  do
+
+    # Generate the filenames
+    basename=${filepath##*/}
+    Filename=${basename%.*}
+
+    echo
+    echo -e "Proccessing \"${Filename}${FC_files}\" file."
+    echo -e "---------------------------------"
+    # Compile the **.FC file to a **.C file and place it to the respective output folder.
+    ./${compilerLocation} < ${filepath} > ${outdir}/${Filename}${OUT_files}
+    # Check if the compiler was successfully finished. 
+    if [ $? == 0 ]; then
+      echo -e "\e[32mFile \"${Filename}\": Done\e[39m"
+    else
+      echo
+      echo -e "\e[31mFile \"${Filename}\": Error\e[39m"
+    fi
+
+  done
+  echo
+  echo
+done

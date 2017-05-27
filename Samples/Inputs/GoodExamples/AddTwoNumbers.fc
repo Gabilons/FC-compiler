@@ -1,0 +1,26 @@
+// A useless piece of FC code - useless.fc
+
+integer i, k;
+
+integer cube(integer i)
+begin
+	return i * i * i;
+end
+
+void add(integer n, integer k)
+begin
+	integer j;
+	j := n + cube(k);
+	writeInteger(j);
+end
+
+/* Here you can see some useless lines.
+** Just for testing the multi-line comments ...
+*/
+integer main()
+begin
+	k := readInteger();
+	i := readInteger();
+	add(k,i); //Here you can see some dummy comments!
+	return 0;
+end
